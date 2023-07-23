@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="jquery.js"></script>
+    <script src=".vendors/jquery.js"></script>
     <script src="./scripts/client.js"></script>
-    <script src="./server/server.js"></script>
+    <link rel="stylesheet" href="./styles/style.css">
     <title>Server Side Calculator</title>
 </head>
 
@@ -18,24 +18,27 @@
         <section id="calculator">
             <!-- Input fields and buttons for calculations go here -->
             
-            <input id="firstNumber"
-                type="number">
-                <button id="addition">+</button>
-                <button id="subtraction">-</button>
-                <button id="multiplication">*</button>
-                <button id="division">/</button>
-            <input id="secondNumber"
-                type="number">
-                <button id="equals">=</button>
-                <button id="clear">C</button>
+                <input id="firstNumber"
+                    type="number">
+                
+                <button id="addBtn" class="operatorBtn">+</button>
+                <button id="subBtn" class="operatorBtn">-</button>
+                <button id="multBtn" class="operatorBtn">*</button>
+                <button id="divBtn" class="operatorBtn">/</button>
+                
+                <input id="secondNumber"
+                    type="number">
+                
+                <button id="equalBtn">=</button>
+                <button id="clearBtn">C</button>
 
-            <div id="solution">
+            <div id="solution" class="output">
                 <!-- New solutions will post here -->
 
             </div>    
         </section>
 
-        <section id="history">
+        <section id="history" class="output">
             <!-- History of calculations will post here  -->
 
         </section>
