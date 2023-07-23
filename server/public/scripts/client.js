@@ -13,7 +13,11 @@ $('#equalBtn').on('click', handleEquals)
 let handleEquals = (event) => {
     event.preventDefault();
     console.log('inside handleEquals');
-    let newComputation = {};
+    let newComputation = {
+        firstNumber: $('#firstNumber').val(),
+        operation: [$('#addBtn'), $('#subBtn'), $('#multBtn'), $('#divBtn')],
+        secondNumber: $('#secondNumber').val(),
+    };
 
     // send data to server
     // route '/compute'
