@@ -12,17 +12,36 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 app.use(express.static('server/public'))
 
-let operation = []
+
+let calculationHist = [];
+let newCalculation;
+let calculation;
+
+function calculate() {
+    console.log('inside calculate', newCalculation.operation);
+    let solution;
+    // if(newCalculation.operation){
+       
+    // }
+       
+}
 
 app.get('/solution', (req, res) => {
-    console.log("Arrived at /solution ")
+    console.log("Arrived at /solution")
 
-    res.sendStatus(200)
+   
+    res.send(calculation)
 
 })
 
 app.post('/compute', (req, res) => {
     console.log("Body for compute:", req.body);
+
+    newCalculation = req.body
+    // calculationHist.push(newCalculation)
+
+    console.log("currentCalculations:", calculation)
+    res.sendStatus(201)
 
 })
 

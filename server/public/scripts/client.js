@@ -1,21 +1,35 @@
 $(document).ready(onReady)
 
 let solutions;
+let operand;
 
 function onReady(){
 // ----- Handlers ------
 
 $('#equalBtn').on('click', handleEquals)
+$('.operatorBtn').on('click','button', handleOperator)
 
 }
 
 // ------ Functions --------
+function handleOperator(){
+    console.log('inside handleOperator')
+    operand = $(this).text();
+    console.log(operand)
+
+    }
+
+
 let handleEquals = (event) => {
     event.preventDefault();
     console.log('inside handleEquals');
-    let newComputation = {
+
+// let num1 = Number($('#firstNumber').val());
+// let num2 = Number($('#secondNumber').val());
+
+    const newCalculation = {
         firstNumber: $('#firstNumber').val(),
-        operation: [$('#addBtn'), $('#subBtn'), $('#multBtn'), $('#divBtn')],
+        operation: operand,
         secondNumber: $('#secondNumber').val(),
     };
 
@@ -24,7 +38,7 @@ let handleEquals = (event) => {
     $.ajax({
         method: "POST",
         url: "/compute",
-        data: newComputation
+        data: newCalculation
     }).then((response) => {
         console.log("POST was successful:", response) // expect 201
 
@@ -60,13 +74,14 @@ let getSolution = () => {
 
 let render = () => {
     
-    for (let solution of solutions) {
-      console.log(solution)
-        $('#history').append(`
-            <ul>
-                <li>
-                </li>
-            </ul>
-        `)  
-    }  
+    // for (let solution of solutions) {
+    //   console.log(solution)
+    //     $('#history').append(`
+    //         <ul>
+    //             <li>
+    //             ${('#firstNumber')('.operatorBtn')('#secondNumber')}
+    //             </li>
+    //         </ul>
+    //     `)  
+    // }  
 }
