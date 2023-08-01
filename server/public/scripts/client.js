@@ -1,6 +1,6 @@
 $(document).ready(onReady)
 
-let solutions;
+let solutions = [];
 let operand;
 
 function onReady(){
@@ -41,10 +41,7 @@ let handleEquals = (event) => {
         data: newCalculation
     }).then((response) => {
         console.log("POST was successful:", response) // expect 201
-
         getSolution()
-        render()
-
     }).catch((error) => {
         console.log("Error with POST request:", error)
         alert("Error with POST")
@@ -63,7 +60,6 @@ let getSolution = () => {
     }).then((response) => {
         console.log(response)
         solutions = response
-        
         render()
 
     }).catch((error) => {
@@ -73,15 +69,15 @@ let getSolution = () => {
 }
 
 let render = () => {
+
+    $('#history').empty()
     
-    // for (let solution of solutions) {
-    //   console.log(solution)
-    //     $('#history').append(`
-    //         <ul>
-    //             <li>
-    //             ${('#firstNumber')('.operatorBtn')('#secondNumber')}
-    //             </li>
-    //         </ul>
-    //     `)  
-    // }  
+    for (let solution of solutions) {
+      console.log(solution)
+        $('#history').append(`
+            <li>
+            ${solution.firstNumber} ${solution.operand} ${solution.secondNumber} = ${solution.solution}
+            </li>
+         `)
+    }
 }
