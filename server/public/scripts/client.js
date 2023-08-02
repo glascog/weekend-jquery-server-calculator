@@ -6,13 +6,26 @@ let operand;
 function onReady(){
 // ----- Handlers ------
 
+// listener for equals button
 $('#equalBtn').on('click', handleEquals)
+
+// listener for operator buttons
 $('.operatorBtn').on('click','button', handleOperator)
+
+// listener for clear button
+$('#clearBtn').on('click', handleClear)
 
 }
 
 // ------ Functions --------
-function handleOperator(){
+
+function handleClear() {
+    console.log('inside handleClear')
+    $('#firstNumber').val('');
+    $('#secondNumber').val('');
+}
+
+function handleOperator (){
     console.log('inside handleOperator')
     operand = $(this).text();
     console.log(operand)
@@ -23,9 +36,6 @@ function handleOperator(){
 let handleEquals = (event) => {
     event.preventDefault();
     console.log('inside handleEquals');
-
-// let num1 = Number($('#firstNumber').val());
-// let num2 = Number($('#secondNumber').val());
 
     const newCalculation = {
         firstNumber: $('#firstNumber').val(),
@@ -60,7 +70,8 @@ let getSolution = () => {
     }).then((response) => {
         console.log(response)
         solutions = response
-        render()
+        renderHistory()
+        renderSolution(solutions)
 
     }).catch((error) => {
         alert("Request Failed")
@@ -68,15 +79,29 @@ let getSolution = () => {
     })
 }
 
-let render = () => {
+// call to show solution of current calculation
+let renderSolution = () => {
+    let currentSolution = solutions[solutions.length - 1].solution
+    console.log('current solution:', currentSolution)
+    // clear last calculation from dom
+    $('#solution').empty();
+    // append new solution to dom
+    $('#solution').append(`${currentSolution}`)
+}
+
+let renderHistory = () => {
 
     $('#history').empty()
     
     for (let solution of solutions) {
-      console.log(solution)
+      
+        console.log('operand:', operand)
+        // console.log('typeof operand:', typeof operand)
+        console.log(solution)
+       
         $('#history').append(`
             <li>
-            ${solution.firstNumber} ${solution.operand} ${solution.secondNumber} = ${solution.solution}
+            ${solution.firstNumber} ${solution.operation} ${solution.secondNumber} = ${solution.solution}
             </li>
          `)
     }
